@@ -10,6 +10,7 @@ on the solutions:
 * Most solutions will be the easiest for me to write.
   * This might mean a lot of brute force, due to the capabilities of a GPU and
     the low effort needed to invent brute force solutions.
+  * The solutions will probably not be close to performance-optimal.
 * I will try to demonstrate something "interesting" about the CUDA target for
   each solution. E.g.:
   * Atomic operations
@@ -22,3 +23,8 @@ on the solutions:
 
 Please direct comments / questions / criticisms / veneration to:
 [@gmarkall](https://twitter.com/gmarkall).
+
+Solutions and interesting features of them:
+
+* [Day 1](day01/solution.py): 2D / 3D grids, atomic exchange for stores.
+* [Day 2](day02/solution.py): Atomic increment, structured arrays.
