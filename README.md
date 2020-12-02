@@ -24,7 +24,22 @@ on the solutions:
 Please direct comments / questions / criticisms / veneration to:
 [@gmarkall](https://twitter.com/gmarkall).
 
-Solutions and interesting features of them:
+
+Solutions
+---------
+
+Links to solutions and some interesting features of them:
 
 * [Day 1](day01/solution.py): 2D / 3D grids, atomic exchange for stores.
 * [Day 2](day02/solution.py): Atomic increment, structured arrays.
+Other approaches:
+
+
+Other approaches
+----------------
+
+* [Jacob Tomlinson](https://jacobtomlinson.dev/) is also [using Numba CUDA to
+  solve AoC](https://github.com/jacobtomlinson/advent-of-gpu-code-2020). He is
+  also streaming and recording his work:
+  * [YouTube](https://www.youtube.com/channel/UCjwcSpcyRYsfZMsliAJzYuQ)
+  * [Twitch](https://www.twitch.tv/constrainedcoding)
