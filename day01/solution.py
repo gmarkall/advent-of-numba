@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: BSD-2-Clause
+
 from numba import cuda
 from math import ceil
 import numpy as np
