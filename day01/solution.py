@@ -13,10 +13,11 @@ with open('input') as f:
 def find_2020(entries, answer):
     # Get the pair for this thread
     i, j = cuda.grid(2)
-    n_entries = len(entries)
+
     # Ensure we don't read off the end of the array there are more threads than
     # entries in a grid dimension. Also avoid duplicating the pairs when (i, j)
     # == (j, i)
+    n_entries = len(entries)
     if i < n_entries and j < n_entries and (i <= j + 1):
         pair_sum = entries[i] + entries[j]
         if pair_sum == 2020:
