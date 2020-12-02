@@ -32,7 +32,6 @@ Links to solutions and some interesting features of them:
 
 * [Day 1](day01/solution.py): 2D / 3D grids, atomic exchange for stores.
 * [Day 2](day02/solution.py): Atomic increment, structured arrays.
-Other approaches:
 
 
 Other approaches
