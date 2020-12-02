@@ -3,7 +3,19 @@ from numba import cuda
 import numpy as np
 
 
+# Input reading / parsing
+#
+# We read the password database in a a structured array. Support for character
+# sequences is a bit limited, so to make life easier we convert everything to
+# the ordinals of characters. The password field is padded out with zeroes so
+# that all passwords are arrays of equal length.
+
 def parse(line):
+    '''
+    Convert a line into a tuple of:
+
+        (lower, upper, letter, length, password)
+    '''
     # Maybe a regex would be better, but I am rubbish at those.
     lower = int(line.split('-')[0])
     upper = int(line.split('-')[1].split()[0])
@@ -12,6 +24,8 @@ def parse(line):
     length = len(password)
     return lower, upper, letter, length, password
 
+
+# Read in input
 
 lowers, uppers, letters, lengths, passwords = [], [], [], [], []
 with open('input') as f:
@@ -22,6 +36,8 @@ with open('input') as f:
         letters.append(letter)
         lengths.append(length)
         passwords.append(password)
+
+# Convert input to a structured array
 
 max_length = max(lengths)
 for i in range(len(passwords)):
@@ -39,6 +55,10 @@ dtype = [
 entries = np.array(list(zip(lowers, uppers, letters, lengths, passwords)),
                    dtype=dtype)
 
+
+# Part 1: Each thread checks if its password is valid. Atomic inc is used for
+# updating the number of valid passwords to prevent threads trampling on each
+# others' updates.
 
 @cuda.jit
 def count_valid_passwords(entries, answer):
@@ -63,11 +83,16 @@ count_valid_passwords[n_blocks, n_threads](entries, answer)
 print(f"The answer to part 1 is {answer[0]}")
 
 
+# Part 2 - a similar mapping of work to threads to part 1, just with a
+# different algorithm to check validity.
+
 @cuda.jit
 def count_valid_new_policy(entries, answer):
     i = cuda.grid(1)
     if i < len(entries):
         entry = entries[i]
+        # Indexing is 1-based in this database, so we need to subtract 1 from
+        # the indices
         p1 = entry['password'][entry['lower'] - 1]
         p2 = entry['password'][entry['upper'] - 1]
         letter = entry['letter']
