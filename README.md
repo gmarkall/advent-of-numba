@@ -32,6 +32,8 @@ Links to solutions and some interesting features of them:
 
 * [Day 1](day01/solution.py): 2D / 3D grids, atomic exchange for stores.
 * [Day 2](day02/solution.py): Atomic increment, structured arrays.
+* [Day 3](day03/solution.py): Building reduction kernels with `@cuda.reduce`,
+  host to device transfers to elide unnecessary copying
 
 
 Other approaches
