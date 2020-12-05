@@ -39,7 +39,8 @@ Links to solutions and some interesting features of them:
   * [A start at the GPU solution](day04/solution.py)
   * Jacob Tomlinson had the good sense to use cuDF for this one. Check out [his
     solution](https://github.com/jacobtomlinson/advent-of-gpu-code-2020/blob/main/solutions/04/Solution.ipynb)!
-
+* [Day 5](day05/solution.py): Cooperative Groups (grid group / grid sync) and
+  device functions.
 
 Other approaches
 ----------------
