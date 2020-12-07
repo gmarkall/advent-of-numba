@@ -41,6 +41,12 @@ Links to solutions and some interesting features of them:
     solution](https://github.com/jacobtomlinson/advent-of-gpu-code-2020/blob/main/solutions/04/Solution.ipynb)!
 * [Day 5](day05/solution.py): Cooperative Groups (grid group / grid sync) and
   device functions.
+* [Day 6](day06/pysolution.py): Python solution only so far. Will need to
+  re-visit to complete a CUDA implementation - should be doable, but I'm under
+  time constraints.
+* [Day 7](day07/pysolution.py): Python solution only so far. Will probably not
+  do a CUDA implementation of this one as it doesn't easily map to a GPU.
+
 
 Other approaches
 ----------------
