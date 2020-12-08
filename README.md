@@ -46,6 +46,9 @@ Links to solutions and some interesting features of them:
   time constraints.
 * [Day 7](day07/pysolution.py): Python solution only so far. Will probably not
   do a CUDA implementation of this one as it doesn't easily map to a GPU.
+* [Day 8](day08/solution.py): Sharing the core computation of an implementation
+  on both the CPU and GPU targets by calling an `@njit` function from a
+  `@cuda.jit` function.
 
 
 Other approaches
