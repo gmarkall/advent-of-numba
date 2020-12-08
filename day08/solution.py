@@ -15,7 +15,6 @@ opcodes = {
 }
 
 
-
 def assemble(lines):
     binary = np.zeros(len(lines), dtype=np.uint16)
     for i, line in enumerate(lines):
@@ -27,29 +26,25 @@ def assemble(lines):
 
 
 binary = assemble(lines)
-for word in binary:
-    print("%X" % word)
 
-print()
 
 @njit
 def execute(binary, visited):
     pc = 0
     accumulator = 0
     while not visited[pc]:
-        print(pc)
         visited[pc] = True
         instr = binary[pc]
+
+        # Extract opcode
         opcode = (instr & 0xC000) >> 14
+
+        # Decode signed 14-bit operand
         operand = (instr & 0x3FFF)
         if (operand & 0x2000):
-            # SIgn extend to 16 bits if necessary
-            operand = operand | 0xF000
-        #print(operand)
-        if (operand & 0x8000):
-            operand = - (65536 - operand)
-        #print(operand)
-        #pc += 1
+            operand = - (16384 - operand)
+
+        # Execute instruction
         if opcode == NOP:
             pc += 1
         elif opcode == ACC:
@@ -58,9 +53,8 @@ def execute(binary, visited):
         elif opcode == JMP:
             pc += operand
     return accumulator
-        
+
 
 visited = np.zeros(len(lines), dtype=np.bool_)
 result = execute(binary, visited)
-print()
-print(result)
+print(f'The answer to part 1 is {result}')
