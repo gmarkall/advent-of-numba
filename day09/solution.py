@@ -53,13 +53,27 @@ impostor = seq[impostor_idx[0]]
 print(f"The answer to part 1 is {impostor}")
 
 
-def find_contiguous(impostor_idx, seq):
-    for i in range(impostor_idx):
-        for j in range(impostor_idx - i):
-            candidate = seq[i:i+j]
-            if sum(candidate) == impostor:
-                return (min(candidate) + max(candidate))
+@cuda.jit
+def find_contiguous(impostor_idx, seq, answer):
+    i = cuda.grid(1)
+    if i >= impostor_idx:
+        return
+
+    for j in range(impostor_idx - i):
+        candidate_sum = 0
+        candidate_min = 999999999999999
+        candidate_max = 0
+        for k in range(i, i+j):
+            current = seq[k]
+            candidate_sum += current
+            candidate_min = min(candidate_min, current)
+            candidate_max = max(candidate_max, current)
+
+        if candidate_sum == impostor:
+            answer[0] = candidate_min + candidate_max
 
 
-answer = find_contiguous(impostor_idx[0], seq)
-print(f"The answer to part 2 is {answer}")
+answer = np.zeros(1, dtype=np.uint32)
+n_blocks = ceil(impostor_idx / n_threads)
+find_contiguous[n_blocks, n_threads](impostor_idx[0], seq, answer)
+print(f"The answer to part 2 is {answer[0]}")
