@@ -49,7 +49,9 @@ Links to solutions and some interesting features of them:
 * [Day 8](day08/solution.py): Sharing the core computation of an implementation
   on both the CPU and GPU targets by calling an `@njit` function from a
   `@cuda.jit` function.
-
+* Day 9: Demonstrates some changes and workarounds needed when porting a pure Python code to the CUDA target - e.g. involving lists, array slicing, array functions.
+  * [Python reference solution](day09/pysolution.py)
+  * [CUDA solution with commentary on workarounds](day09/solution.py)
 
 Other approaches
 ----------------
